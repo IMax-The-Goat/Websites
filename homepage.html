@@ -1,0 +1,140 @@
+<!--
+<!DOCTYPE html>
+
+<head>
+  <title>ImaxTheGoat</title>
+</head>
+
+<div style="width:1193px;height:75px;background:white;float:top;left:0;top:0;padding:5px;">
+  <h1>Home</h1>
+  </div>
+  
+  <div style="width:100px;height:575px;background:rgb(211, 211, 211);float:left;left:200px;top:0;padding:5px;">
+  <p><a href="homepage.html" style="color: black;">HOME</a></p>
+  <p><a href="games.html" style="color: black;">Games</a></p>
+  <p><a href="usefulStuff.html" style="color: black;">Useful Stuff</a></p>
+</div>
+
+<article>
+
+  <body style="background-color:rgb(0, 183, 255)">
+  <h4 style="color:white;left:600">Here is a webpage that you can use to navigate through all your codes</h4>
+
+  </body>  
+
+</article>
+-->
+
+<!DOCTYPE html>
+
+
+<!-- Template by quackit.com -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Imax's Website</title>
+		<style type="text/css">
+		
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%; 
+        max-height: 100%; 
+        font-family:Sans-serif;
+        line-height: 1.5em;
+      }
+      
+      #header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px; 
+        overflow: hidden; /* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" */
+        background: white;
+      }
+      
+      #nav {
+        position: absolute; 
+        top: 100px; 
+        left: 0; 
+        bottom: 0;
+        width: 150px;
+        overflow: auto; /* Scrollbars will appear on this frame only when there's enough content to require scrolling. To disable scrollbars, change to "hidden", or use "scroll" to enable permanent scrollbars */
+        background:rgb(211, 211, 211); 
+      }
+      
+      #logo {
+        padding:10px;
+      }
+      
+      main {
+        position: fixed;
+        top: 100px; /* Set this to the height of the header */
+        left: 150px; 
+        right: 0;
+        bottom: 0;
+        overflow: auto; 
+        background: rgb(0, 183, 255);
+      }
+      
+      .innertube {
+        margin: 15px; /* Provides padding for the content */
+      }
+      
+      p {
+        color: #555;
+      }
+
+      nav h1, nav h1 a, nav l1 a {
+        color: black;
+        text-decoration: none;
+      }
+
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+
+          
+      /*IE6 fix*/
+      * html body{
+        padding: 100px 0 0 230px; /* Set the first value to the height of the header and last value to the width of the nav */
+      }
+      
+      * html main{ 
+        height: 100%; 
+        width: 100%; 
+      }
+		
+		</style>
+		
+	</head>
+	
+	<body>		
+
+		<header id="header">
+			<div id="logo">
+				<!-- <h1 style="font-size:45px;color:black">Imax The Goat</h1> -->
+        <img src="../Logo.png" style="max-width:23%; max-height:23%" alt="Sample picture">
+			</div>
+		</header>
+				
+		<main>
+			<div class="innertube">
+				<p style="font-size:10; color:white">My site</p>
+        <!-- <img src="../Logo.png" style="max-width:50%;" alt="Sample picture"> -->
+			</div>
+		</main>
+
+		<nav id="nav">
+			<div class="innertube">
+				<h1><a href="games.html" style="text-decoration:none;color:black;">Games</a></h1>
+				<h1><a href="everyday.html" style="text-decoration:none;color:black;">Everyday Codes</a></h1>
+			</div>
+		</nav>	
+	</body>
+</html>

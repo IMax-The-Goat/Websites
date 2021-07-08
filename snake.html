@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<title>Snake</title>
+
+<style>
+  .grid-container {
+    text-align: left;
+    display: grid;
+    grid-gap: 0px 0px;
+    grid-template-columns: repeat(45, auto);
+    background-color:darkgreen;
+
+    width: 945px; /* full length is 959 */
+    height: 567px; 
+
+    /* 45x27 with block size 21x21 */
+
+    top: 100px;
+    left: 150px;
+
+    margin-left: auto; margin-right: auto;
+    margin-top: auto; margin-bottom: auto;
+    padding: 0px;
+  }
+
+  .grid-item {
+    font-family: "Permanent Marker", cursive;
+    background-color: white;
+    border: 0px solid black;
+    padding: 0px;
+    font-size: 10px;
+    text-align: center;
+    width: 21px;
+    height: 21px;
+  }
+
+  #menu {
+    width: 30%;
+    margin-left: auto; margin-right: auto;
+    margin-top: auto; margin-bottom: auto;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+  }
+  #losemenu {
+    width: 30%;
+    margin-left: auto; margin-right: auto;
+    margin-top: auto; margin-bottom: auto;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+  }
+</style>
+
+<style type="text/css"> 
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%; 
+    max-height: 100%; 
+    font-family:Sans-serif;
+    line-height: 1.5em;
+  }
+  
+  #header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; 
+    overflow: hidden; /* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" */
+    background: white;
+  }
+  
+  #nav {
+    position: absolute; 
+    top: 100px; 
+    left: 0; 
+    bottom: 0;
+    width: 149px;
+    overflow: auto; /* Scrollbars will appear on this frame only when there's enough content to require scrolling. To disable scrollbars, change to "hidden", or use "scroll" to enable permanent scrollbars */
+    background:rgb(211, 211, 211); 
+  }
+  
+  #logo {
+    padding:10px;
+  }
+  
+  main {
+    position: fixed;
+    top: 100px; /* Set this to the height of the header */
+    left: 150px; 
+    right: 0;
+    bottom: 0;
+    overflow: auto; 
+    background: darkgreen;
+  }
+  
+  .innertube {
+    /* margin-right: 2px; /* Provides padding for the content 
+    margin-top: 15.5px; */
+    margin-left: auto; margin-right: auto;
+    margin-top: auto; margin-bottom: auto;
+  }
+  
+  p {
+    color: #555;
+  }
+
+  nav h1, nav h1 a, nav l1 a {
+    color: black;
+    text-decoration: none;
+  }
+
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+
+      
+  /*IE6 fix*/
+  * html body{
+    padding: 100px 0 0 150px; /* Set the first value to the height of the header and last value to the width of the nav */
+  }
+  
+  * html main{ 
+    height: 100%; 
+    width: 100%; 
+  }
+
+</style>
+
+<script src="../JavaScript/Games/Snake.js"></script>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">		
+	</head>
+	
+	<body>		
+
+		<header id="header">
+			<div id="logo">
+        <a href="homepage.html" style="float:left"><img src="../Logo.png" style="max-width:33.3%;" alt="Sample picture"></a><h1 id="scoreOutput" style="text-align:right; float:right; top:0px; right:100%">Score: 0</h1>
+
+      </div> 
+        
+		</header>
+				
+		<main>
+			<div class="innertube" onclick="play()">
+
+        <body>
+            
+          <div class="grid-container"> <!-- 45x27 -->
+                
+                <div class="grid-item" id="board.0.0"></div>
+                <div class="grid-item" id="board.1.0"></div>
+                <div class="grid-item" id="board.2.0"></div>
+                <div class="grid-item" id="board.3.0"></div>
+                <div class="grid-item" id="board.4.0"></div>
+                <div class="grid-item" id="board.5.0"></div>
+                <div class="grid-item" id="board.6.0"></div>
+                <div class="grid-item" id="board.7.0"></div>
+                <div class="grid-item" id="board.8.0"></div>
+                <div class="grid-item" id="board.9.0"></div>
+                <div class="grid-item" id="board.10.0"></div>
+                <div class="grid-item" id="board.11.0"></div>
+                <div class="grid-item" id="board.12.0"></div>
+                <div class="grid-item" id="board.13.0"></div>
+                <div class="grid-item" id="board.14.0"></div>
+                <div class="grid-item" id="board.15.0"></div>
+                <div class="grid-item" id="board.16.0"></div>
+                <div class="grid-item" id="board.17.0"></div>
+                <div class="grid-item" id="board.18.0"></div>
+                <div class="grid-item" id="board.19.0"></div>
+                <div class="grid-item" id="board.20.0"></div>
+                <div class="grid-item" id="board.21.0"></div>
+                <div class="grid-item" id="board.22.0"></div>
+                <div class="grid-item" id="board.23.0"></div>
+                <div class="grid-item" id="board.24.0"></div>
+                <div class="grid-item" id="board.25.0"></div>
+                <div class="grid-item" id="board.26.0"></div>
+                <div class="grid-item" id="board.27.0"></div>
+                <div class="grid-item" id="board.28.0"></div>
+                <div class="grid-item" id="board.29.0"></div>
+                <div class="grid-item" id="board.30.0"></div>
+                <div class="grid-item" id="board.31.0"></div>
+                <div class="grid-item" id="board.32.0"></div>
+                <div class="grid-item" id="board.33.0"></div>
+                <div class="grid-item" id="board.34.0"></div>
+                <div class="grid-item" id="board.35.0"></div>
+                <div class="grid-item" id="board.36.0"></div>
+                <div class="grid-item" id="board.37.0"></div>
+                <div class="grid-item" id="board.38.0"></div>
+                <div class="grid-item" id="board.39.0"></div>
+                <div class="grid-item" id="board.40.0"></div>
+                <div class="grid-item" id="board.41.0"></div>
+                <div class="grid-item" id="board.42.0"></div>
+                <div class="grid-item" id="board.43.0"></div>
+                <div class="grid-item" id="board.44.0"></div>
+
+                <div class="grid-item" id="board.0.1"></div>
+                <div class="grid-item" id="board.1.1"></div>
+                <div class="grid-item" id="board.2.1"></div>
+                <div class="grid-item" id="board.3.1"></div>
+                <div class="grid-item" id="board.4.1"></div>
+                <div class="grid-item" id="board.5.1"></div>
+                <div class="grid-item" id="board.6.1"></div>
+                <div class="grid-item" id="board.7.1"></div>
+                <div class="grid-item" id="board.8.1"></div>
+                <div class="grid-item" id="board.9.1"></div>
+                <div class="grid-item" id="board.10.1"></div>
+                <div class="grid-item" id="board.11.1"></div>
+                <div class="grid-item" id="board.12.1"></div>
+                <div class="grid-item" id="board.13.1"></div>
+                <div class="grid-item" id="board.14.1"></div>
+                <div class="grid-item" id="board.15.1"></div>
+                <div class="grid-item" id="board.16.1"></div>
+                <div class="grid-item" id="board.17.1"></div>
+                <div class="grid-item" id="board.18.1"></div>
+                <div class="grid-item" id="board.19.1"></div>
+                <div class="grid-item" id="board.20.1"></div>
+                <div class="grid-item" id="board.21.1"></div>
+                <div class="grid-item" id="board.22.1"></div>
+                <div class="grid-item" id="board.23.1"></div>
+                <div class="grid-item" id="board.24.1"></div>
+                <div class="grid-item" id="board.25.1"></div>
+                <div class="grid-item" id="board.26.1"></div>
+                <div class="grid-item" id="board.27.1"></div>
+                <div class="grid-item" id="board.28.1"></div>
+                <div class="grid-item" id="board.29.1"></div>
+                <div class="grid-item" id="board.30.1"></div>
+                <div class="grid-item" id="board.31.1"></div>
+                <div class="grid-item" id="board.32.1"></div>
+                <div class="grid-item" id="board.33.1"></div>
+                <div class="grid-item" id="board.34.1"></div>
+                <div class="grid-item" id="board.35.1"></div>
+                <div class="grid-item" id="board.36.1"></div>
+                <div class="grid-item" id="board.37.1"></div>
+                <div class="grid-item" id="board.38.1"></div>
+                <div class="grid-item" id="board.39.1"></div>
+                <div class="grid-item" id="board.40.1"></div>
+                <div class="grid-item" id="board.41.1"></div>
+                <div class="grid-item" id="board.42.1"></div>
+                <div class="grid-item" id="board.43.1"></div>
+                <div class="grid-item" id="board.44.1"></div>
+
+                <div class="grid-item" id="board.0.2"></div>
+                <div class="grid-item" id="board.1.2"></div>
+                <div class="grid-item" id="board.2.2"></div>
+                <div class="grid-item" id="board.3.2"></div>
+                <div class="grid-item" id="board.4.2"></div>
+                <div class="grid-item" id="board.5.2"></div>
+                <div class="grid-item" id="board.6.2"></div>
+                <div class="grid-item" id="board.7.2"></div>
+                <div class="grid-item" id="board.8.2"></div>
+                <div class="grid-item" id="board.9.2"></div>
+                <div class="grid-item" id="board.10.2"></div>
+                <div class="grid-item" id="board.11.2"></div>
+                <div class="grid-item" id="board.12.2"></div>
+                <div class="grid-item" id="board.13.2"></div>
+                <div class="grid-item" id="board.14.2"></div>
+                <div class="grid-item" id="board.15.2"></div>
+                <div class="grid-item" id="board.16.2"></div>
+                <div class="grid-item" id="board.17.2"></div>
+                <div class="grid-item" id="board.18.2"></div>
+                <div class="grid-item" id="board.19.2"></div>
+                <div class="grid-item" id="board.20.2"></div>
+                <div class="grid-item" id="board.21.2"></div>
+                <div class="grid-item" id="board.22.2"></div>
+                <div class="grid-item" id="board.23.2"></div>
+                <div class="grid-item" id="board.24.2"></div>
+                <div class="grid-item" id="board.25.2"></div>
+                <div class="grid-item" id="board.26.2"></div>
+                <div class="grid-item" id="board.27.2"></div>
+                <div class="grid-item" id="board.28.2"></div>
+                <div class="grid-item" id="board.29.2"></div>
+                <div class="grid-item" id="board.30.2"></div>
+                <div class="grid-item" id="board.31.2"></div>
+                <div class="grid-item" id="board.32.2"></div>
+                <div class="grid-item" id="board.33.2"></div>
+                <div class="grid-item" id="board.34.2"></div>
+                <div class="grid-item" id="board.35.2"></div>
+                <div class="grid-item" id="board.36.2"></div>
+                <div class="grid-item" id="board.37.2"></div>
+                <div class="grid-item" id="board.38.2"></div>
+                <div class="grid-item" id="board.39.2"></div>
+                <div class="grid-item" id="board.40.2"></div>
+                <div class="grid-item" id="board.41.2"></div>
+                <div class="grid-item" id="board.42.2"></div>
+                <div class="grid-item" id="board.43.2"></div>
+                <div class="grid-item" id="board.44.2"></div>
+
+                <div class="grid-item" id="board.0.3"></div>
+                <div class="grid-item" id="board.1.3"></div>
+                <div class="grid-item" id="board.2.3"></div>
+                <div class="grid-item" id="board.3.3"></div>
+                <div class="grid-item" id="board.4.3"></div>
+                <div class="grid-item" id="board.5.3"></div>
+                <div class="grid-item" id="board.6.3"></div>
+                <div class="grid-item" id="board.7.3"></div>
+                <div class="grid-item" id="board.8.3"></div>
+                <div class="grid-item" id="board.9.3"></div>
+                <div class="grid-item" id="board.10.3"></div>
+                <div class="grid-item" id="board.11.3"></div>
+                <div class="grid-item" id="board.12.3"></div>
+                <div class="grid-item" id="board.13.3"></div>
+                <div class="grid-item" id="board.14.3"></div>
+                <div class="grid-item" id="board.15.3"></div>
+                <div class="grid-item" id="board.16.3"></div>
+                <div class="grid-item" id="board.17.3"></div>
+                <div class="grid-item" id="board.18.3"></div>
+                <div class="grid-item" id="board.19.3"></div>
+                <div class="grid-item" id="board.20.3"></div>
+                <div class="grid-item" id="board.21.3"></div>
+                <div class="grid-item" id="board.22.3"></div>
+                <div class="grid-item" id="board.23.3"></div>
+                <div class="grid-item" id="board.24.3"></div>
+                <div class="grid-item" id="board.25.3"></div>
+                <div class="grid-item" id="board.26.3"></div>
+                <div class="grid-item" id="board.27.3"></div>
+                <div class="grid-item" id="board.28.3"></div>
+                <div class="grid-item" id="board.29.3"></div>
+                <div class="grid-item" id="board.30.3"></div>
+                <div class="grid-item" id="board.31.3"></div>
+                <div class="grid-item" id="board.32.3"></div>
+                <div class="grid-item" id="board.33.3"></div>
+                <div class="grid-item" id="board.34.3"></div>
+                <div class="grid-item" id="board.35.3"></div>
+                <div class="grid-item" id="board.36.3"></div>
+                <div class="grid-item" id="board.37.3"></div>
+                <div class="grid-item" id="board.38.3"></div>
+                <div class="grid-item" id="board.39.3"></div>
+                <div class="grid-item" id="board.40.3"></div>
+                <div class="grid-item" id="board.41.3"></div>
+                <div class="grid-item" id="board.42.3"></div>
+                <div class="grid-item" id="board.43.3"></div>
+                <div class="grid-item" id="board.44.3"></div>
+
+                <div class="grid-item" id="board.0.4"></div>
+                <div class="grid-item" id="board.1.4"></div>
+                <div class="grid-item" id="board.2.4"></div>
+                <div class="grid-item" id="board.3.4"></div>
+                <div class="grid-item" id="board.4.4"></div>
+                <div class="grid-item" id="board.5.4"></div>
+                <div class="grid-item" id="board.6.4"></div>
+                <div class="grid-item" id="board.7.4"></div>
+                <div class="grid-item" id="board.8.4"></div>
+                <div class="grid-item" id="board.9.4"></div>
+                <div class="grid-item" id="board.10.4"></div>
+                <div class="grid-item" id="board.11.4"></div>
+                <div class="grid-item" id="board.12.4"></div>
+                <div class="grid-item" id="board.13.4"></div>
+                <div class="grid-item" id="board.14.4"></div>
+                <div class="grid-item" id="board.15.4"></div>
+                <div class="grid-item" id="board.16.4"></div>
+                <div class="grid-item" id="board.17.4"></div>
+                <div class="grid-item" id="board.18.4"></div>
+                <div class="grid-item" id="board.19.4"></div>
+                <div class="grid-item" id="board.20.4"></div>
+                <div class="grid-item" id="board.21.4"></div>
+                <div class="grid-item" id="board.22.4"></div>
+                <div class="grid-item" id="board.23.4"></div>
+                <div class="grid-item" id="board.24.4"></div>
+                <div class="grid-item" id="board.25.4"></div>
+                <div class="grid-item" id="board.26.4"></div>
+                <div class="grid-item" id="board.27.4"></div>
+                <div class="grid-item" id="board.28.4"></div>
+                <div class="grid-item" id="board.29.4"></div>
+                <div class="grid-item" id="board.30.4"></div>
+                <div class="grid-item" id="board.31.4"></div>
+                <div class="grid-item" id="board.32.4"></div>
+                <div class="grid-item" id="board.33.4"></div>
+                <div class="grid-item" id="board.34.4"></div>
+                <div class="grid-item" id="board.35.4"></div>
+                <div class="grid-item" id="board.36.4"></div>
+                <div class="grid-item" id="board.37.4"></div>
+                <div class="grid-item" id="board.38.4"></div>
+                <div class="grid-item" id="board.39.4"></div>
+                <div class="grid-item" id="board.40.4"></div>
+                <div class="grid-item" id="board.41.4"></div>
+                <div class="grid-item" id="board.42.4"></div>
+                <div class="grid-item" id="board.43.4"></div>
+                <div class="grid-item" id="board.44.4"></div>
+
+                <div class="grid-item" id="board.0.5"></div>
+                <div class="grid-item" id="board.1.5"></div>
+                <div class="grid-item" id="board.2.5"></div>
+                <div class="grid-item" id="board.3.5"></div>
+                <div class="grid-item" id="board.4.5"></div>
+                <div class="grid-item" id="board.5.5"></div>
+                <div class="grid-item" id="board.6.5"></div>
+                <div class="grid-item" id="board.7.5"></div>
+                <div class="grid-item" id="board.8.5"></div>
+                <div class="grid-item" id="board.9.5"></div>
+                <div class="grid-item" id="board.10.5"></div>
+                <div class="grid-item" id="board.11.5"></div>
+                <div class="grid-item" id="board.12.5"></div>
+                <div class="grid-item" id="board.13.5"></div>
+                <div class="grid-item" id="board.14.5"></div>
+                <div class="grid-item" id="board.15.5"></div>
+                <div class="grid-item" id="board.16.5"></div>
+                <div class="grid-item" id="board.17.5"></div>
+                <div class="grid-item" id="board.18.5"></div>
+                <div class="grid-item" id="board.19.5"></div>
+                <div class="grid-item" id="board.20.5"></div>
+                <div class="grid-item" id="board.21.5"></div>
+                <div class="grid-item" id="board.22.5"></div>
+                <div class="grid-item" id="board.23.5"></div>
+                <div class="grid-item" id="board.24.5"></div>
+                <div class="grid-item" id="board.25.5"></div>
+                <div class="grid-item" id="board.26.5"></div>
+                <div class="grid-item" id="board.27.5"></div>
+                <div class="grid-item" id="board.28.5"></div>
+                <div class="grid-item" id="board.29.5"></div>
+                <div class="grid-item" id="board.30.5"></div>
+                <div class="grid-item" id="board.31.5"></div>
+                <div class="grid-item" id="board.32.5"></div>
+                <div class="grid-item" id="board.33.5"></div>
+                <div class="grid-item" id="board.34.5"></div>
+                <div class="grid-item" id="board.35.5"></div>
+                <div class="grid-item" id="board.36.5"></div>
+                <div class="grid-item" id="board.37.5"></div>
+                <div class="grid-item" id="board.38.5"></div>
+                <div class="grid-item" id="board.39.5"></div>
+                <div class="grid-item" id="board.40.5"></div>
+                <div class="grid-item" id="board.41.5"></div>
+                <div class="grid-item" id="board.42.5"></div>
+                <div class="grid-item" id="board.43.5"></div>
+                <div class="grid-item" id="board.44.5"></div>
+
+                <div class="grid-item" id="board.0.6"></div>
+                <div class="grid-item" id="board.1.6"></div>
+                <div class="grid-item" id="board.2.6"></div>
+                <div class="grid-item" id="board.3.6"></div>
+                <div class="grid-item" id="board.4.6"></div>
+                <div class="grid-item" id="board.5.6"></div>
+                <div class="grid-item" id="board.6.6"></div>
+                <div class="grid-item" id="board.7.6"></div>
+                <div class="grid-item" id="board.8.6"></div>
+                <div class="grid-item" id="board.9.6"></div>
+                <div class="grid-item" id="board.10.6"></div>
+                <div class="grid-item" id="board.11.6"></div>
+                <div class="grid-item" id="board.12.6"></div>
+                <div class="grid-item" id="board.13.6"></div>
+                <div class="grid-item" id="board.14.6"></div>
+                <div class="grid-item" id="board.15.6"></div>
+                <div class="grid-item" id="board.16.6"></div>
+                <div class="grid-item" id="board.17.6"></div>
+                <div class="grid-item" id="board.18.6"></div>
+                <div class="grid-item" id="board.19.6"></div>
+                <div class="grid-item" id="board.20.6"></div>
+                <div class="grid-item" id="board.21.6"></div>
+                <div class="grid-item" id="board.22.6"></div>
+                <div class="grid-item" id="board.23.6"></div>
+                <div class="grid-item" id="board.24.6"></div>
+                <div class="grid-item" id="board.25.6"></div>
+                <div class="grid-item" id="board.26.6"></div>
+                <div class="grid-item" id="board.27.6"></div>
+                <div class="grid-item" id="board.28.6"></div>
+                <div class="grid-item" id="board.29.6"></div>
+                <div class="grid-item" id="board.30.6"></div>
+                <div class="grid-item" id="board.31.6"></div>
+                <div class="grid-item" id="board.32.6"></div>
+                <div class="grid-item" id="board.33.6"></div>
+                <div class="grid-item" id="board.34.6"></div>
+                <div class="grid-item" id="board.35.6"></div>
+                <div class="grid-item" id="board.36.6"></div>
+                <div class="grid-item" id="board.37.6"></div>
+                <div class="grid-item" id="board.38.6"></div>
+                <div class="grid-item" id="board.39.6"></div>
+                <div class="grid-item" id="board.40.6"></div>
+                <div class="grid-item" id="board.41.6"></div>
+                <div class="grid-item" id="board.42.6"></div>
+                <div class="grid-item" id="board.43.6"></div>
+                <div class="grid-item" id="board.44.6"></div>
+
+                <div class="grid-item" id="board.0.7"></div>
+                <div class="grid-item" id="board.1.7"></div>
+                <div class="grid-item" id="board.2.7"></div>
+                <div class="grid-item" id="board.3.7"></div>
+                <div class="grid-item" id="board.4.7"></div>
+                <div class="grid-item" id="board.5.7"></div>
+                <div class="grid-item" id="board.6.7"></div>
+                <div class="grid-item" id="board.7.7"></div>
+                <div class="grid-item" id="board.8.7"></div>
+                <div class="grid-item" id="board.9.7"></div>
+                <div class="grid-item" id="board.10.7"></div>
+                <div class="grid-item" id="board.11.7"></div>
+                <div class="grid-item" id="board.12.7"></div>
+                <div class="grid-item" id="board.13.7"></div>
+                <div class="grid-item" id="board.14.7"></div>
+                <div class="grid-item" id="board.15.7"></div>
+                <div class="grid-item" id="board.16.7"></div>
+                <div class="grid-item" id="board.17.7"></div>
+                <div class="grid-item" id="board.18.7"></div>
+                <div class="grid-item" id="board.19.7"></div>
+                <div class="grid-item" id="board.20.7"></div>
+                <div class="grid-item" id="board.21.7"></div>
+                <div class="grid-item" id="board.22.7"></div>
+                <div class="grid-item" id="board.23.7"></div>
+                <div class="grid-item" id="board.24.7"></div>
+                <div class="grid-item" id="board.25.7"></div>
+                <div class="grid-item" id="board.26.7"></div>
+                <div class="grid-item" id="board.27.7"></div>
+                <div class="grid-item" id="board.28.7"></div>
+                <div class="grid-item" id="board.29.7"></div>
+                <div class="grid-item" id="board.30.7"></div>
+                <div class="grid-item" id="board.31.7"></div>
+                <div class="grid-item" id="board.32.7"></div>
+                <div class="grid-item" id="board.33.7"></div>
+                <div class="grid-item" id="board.34.7"></div>
+                <div class="grid-item" id="board.35.7"></div>
+                <div class="grid-item" id="board.36.7"></div>
+                <div class="grid-item" id="board.37.7"></div>
+                <div class="grid-item" id="board.38.7"></div>
+                <div class="grid-item" id="board.39.7"></div>
+                <div class="grid-item" id="board.40.7"></div>
+                <div class="grid-item" id="board.41.7"></div>
+                <div class="grid-item" id="board.42.7"></div>
+                <div class="grid-item" id="board.43.7"></div>
+                <div class="grid-item" id="board.44.7"></div>
+
+                <div class="grid-item" id="board.0.8"></div>
+                <div class="grid-item" id="board.1.8"></div>
+                <div class="grid-item" id="board.2.8"></div>
+                <div class="grid-item" id="board.3.8"></div>
+                <div class="grid-item" id="board.4.8"></div>
+                <div class="grid-item" id="board.5.8"></div>
+                <div class="grid-item" id="board.6.8"></div>
+                <div class="grid-item" id="board.7.8"></div>
+                <div class="grid-item" id="board.8.8"></div>
+                <div class="grid-item" id="board.9.8"></div>
+                <div class="grid-item" id="board.10.8"></div>
+                <div class="grid-item" id="board.11.8"></div>
+                <div class="grid-item" id="board.12.8"></div>
+                <div class="grid-item" id="board.13.8"></div>
+                <div class="grid-item" id="board.14.8"></div>
+                <div class="grid-item" id="board.15.8"></div>
+                <div class="grid-item" id="board.16.8"></div>
+                <div class="grid-item" id="board.17.8"></div>
+                <div class="grid-item" id="board.18.8"></div>
+                <div class="grid-item" id="board.19.8"></div>
+                <div class="grid-item" id="board.20.8"></div>
+                <div class="grid-item" id="board.21.8"></div>
+                <div class="grid-item" id="board.22.8"></div>
+                <div class="grid-item" id="board.23.8"></div>
+                <div class="grid-item" id="board.24.8"></div>
+                <div class="grid-item" id="board.25.8"></div>
+                <div class="grid-item" id="board.26.8"></div>
+                <div class="grid-item" id="board.27.8"></div>
+                <div class="grid-item" id="board.28.8"></div>
+                <div class="grid-item" id="board.29.8"></div>
+                <div class="grid-item" id="board.30.8"></div>
+                <div class="grid-item" id="board.31.8"></div>
+                <div class="grid-item" id="board.32.8"></div>
+                <div class="grid-item" id="board.33.8"></div>
+                <div class="grid-item" id="board.34.8"></div>
+                <div class="grid-item" id="board.35.8"></div>
+                <div class="grid-item" id="board.36.8"></div>
+                <div class="grid-item" id="board.37.8"></div>
+                <div class="grid-item" id="board.38.8"></div>
+                <div class="grid-item" id="board.39.8"></div>
+                <div class="grid-item" id="board.40.8"></div>
+                <div class="grid-item" id="board.41.8"></div>
+                <div class="grid-item" id="board.42.8"></div>
+                <div class="grid-item" id="board.43.8"></div>
+                <div class="grid-item" id="board.44.8"></div>
+
+                <div class="grid-item" id="board.0.9"></div>
+                <div class="grid-item" id="board.1.9"></div>
+                <div class="grid-item" id="board.2.9"></div>
+                <div class="grid-item" id="board.3.9"></div>
+                <div class="grid-item" id="board.4.9"></div>
+                <div class="grid-item" id="board.5.9"></div>
+                <div class="grid-item" id="board.6.9"></div>
+                <div class="grid-item" id="board.7.9"></div>
+                <div class="grid-item" id="board.8.9"></div>
+                <div class="grid-item" id="board.9.9"></div>
+                <div class="grid-item" id="board.10.9"></div>
+                <div class="grid-item" id="board.11.9"></div>
+                <div class="grid-item" id="board.12.9"></div>
+                <div class="grid-item" id="board.13.9"></div>
+                <div class="grid-item" id="board.14.9"></div>
+                <div class="grid-item" id="board.15.9"></div>
+                <div class="grid-item" id="board.16.9"></div>
+                <div class="grid-item" id="board.17.9"></div>
+                <div class="grid-item" id="board.18.9"></div>
+                <div class="grid-item" id="board.19.9"></div>
+                <div class="grid-item" id="board.20.9"></div>
+                <div class="grid-item" id="board.21.9"></div>
+                <div class="grid-item" id="board.22.9"></div>
+                <div class="grid-item" id="board.23.9"></div>
+                <div class="grid-item" id="board.24.9"></div>
+                <div class="grid-item" id="board.25.9"></div>
+                <div class="grid-item" id="board.26.9"></div>
+                <div class="grid-item" id="board.27.9"></div>
+                <div class="grid-item" id="board.28.9"></div>
+                <div class="grid-item" id="board.29.9"></div>
+                <div class="grid-item" id="board.30.9"></div>
+                <div class="grid-item" id="board.31.9"></div>
+                <div class="grid-item" id="board.32.9"></div>
+                <div class="grid-item" id="board.33.9"></div>
+                <div class="grid-item" id="board.34.9"></div>
+                <div class="grid-item" id="board.35.9"></div>
+                <div class="grid-item" id="board.36.9"></div>
+                <div class="grid-item" id="board.37.9"></div>
+                <div class="grid-item" id="board.38.9"></div>
+                <div class="grid-item" id="board.39.9"></div>
+                <div class="grid-item" id="board.40.9"></div>
+                <div class="grid-item" id="board.41.9"></div>
+                <div class="grid-item" id="board.42.9"></div>
+                <div class="grid-item" id="board.43.9"></div>
+                <div class="grid-item" id="board.44.9"></div>
+
+                <div class="grid-item" id="board.0.10"></div>
+                <div class="grid-item" id="board.1.10"></div>
+                <div class="grid-item" id="board.2.10"></div>
+                <div class="grid-item" id="board.3.10"></div>
+                <div class="grid-item" id="board.4.10"></div>
+                <div class="grid-item" id="board.5.10"></div>
+                <div class="grid-item" id="board.6.10"></div>
+                <div class="grid-item" id="board.7.10"></div>
+                <div class="grid-item" id="board.8.10"></div>
+                <div class="grid-item" id="board.9.10"></div>
+                <div class="grid-item" id="board.10.10"></div>
+                <div class="grid-item" id="board.11.10"></div>
+                <div class="grid-item" id="board.12.10"></div>
+                <div class="grid-item" id="board.13.10"></div>
+                <div class="grid-item" id="board.14.10"></div>
+                <div class="grid-item" id="board.15.10"></div>
+                <div class="grid-item" id="board.16.10"></div>
+                <div class="grid-item" id="board.17.10"></div>
+                <div class="grid-item" id="board.18.10"></div>
+                <div class="grid-item" id="board.19.10"></div>
+                <div class="grid-item" id="board.20.10"></div>
+                <div class="grid-item" id="board.21.10"></div>
+                <div class="grid-item" id="board.22.10"></div>
+                <div class="grid-item" id="board.23.10"></div>
+                <div class="grid-item" id="board.24.10"></div>
+                <div class="grid-item" id="board.25.10"></div>
+                <div class="grid-item" id="board.26.10"></div>
+                <div class="grid-item" id="board.27.10"></div>
+                <div class="grid-item" id="board.28.10"></div>
+                <div class="grid-item" id="board.29.10"></div>
+                <div class="grid-item" id="board.30.10"></div>
+                <div class="grid-item" id="board.31.10"></div>
+                <div class="grid-item" id="board.32.10"></div>
+                <div class="grid-item" id="board.33.10"></div>
+                <div class="grid-item" id="board.34.10"></div>
+                <div class="grid-item" id="board.35.10"></div>
+                <div class="grid-item" id="board.36.10"></div>
+                <div class="grid-item" id="board.37.10"></div>
+                <div class="grid-item" id="board.38.10"></div>
+                <div class="grid-item" id="board.39.10"></div>
+                <div class="grid-item" id="board.40.10"></div>
+                <div class="grid-item" id="board.41.10"></div>
+                <div class="grid-item" id="board.42.10"></div>
+                <div class="grid-item" id="board.43.10"></div>
+                <div class="grid-item" id="board.44.10"></div>
+
+                <div class="grid-item" id="board.0.11"></div>
+                <div class="grid-item" id="board.1.11"></div>
+                <div class="grid-item" id="board.2.11"></div>
+                <div class="grid-item" id="board.3.11"></div>
+                <div class="grid-item" id="board.4.11"></div>
+                <div class="grid-item" id="board.5.11"></div>
+                <div class="grid-item" id="board.6.11"></div>
+                <div class="grid-item" id="board.7.11"></div>
+                <div class="grid-item" id="board.8.11"></div>
+                <div class="grid-item" id="board.9.11"></div>
+                <div class="grid-item" id="board.10.11"></div>
+                <div class="grid-item" id="board.11.11"></div>
+                <div class="grid-item" id="board.12.11"></div>
+                <div class="grid-item" id="board.13.11"></div>
+                <div class="grid-item" id="board.14.11"></div>
+                <div class="grid-item" id="board.15.11"></div>
+                <div class="grid-item" id="board.16.11"></div>
+                <div class="grid-item" id="board.17.11"></div>
+                <div class="grid-item" id="board.18.11"></div>
+                <div class="grid-item" id="board.19.11"></div>
+                <div class="grid-item" id="board.20.11"></div>
+                <div class="grid-item" id="board.21.11"></div>
+                <div class="grid-item" id="board.22.11"></div>
+                <div class="grid-item" id="board.23.11"></div>
+                <div class="grid-item" id="board.24.11"></div>
+                <div class="grid-item" id="board.25.11"></div>
+                <div class="grid-item" id="board.26.11"></div>
+                <div class="grid-item" id="board.27.11"></div>
+                <div class="grid-item" id="board.28.11"></div>
+                <div class="grid-item" id="board.29.11"></div>
+                <div class="grid-item" id="board.30.11"></div>
+                <div class="grid-item" id="board.31.11"></div>
+                <div class="grid-item" id="board.32.11"></div>
+                <div class="grid-item" id="board.33.11"></div>
+                <div class="grid-item" id="board.34.11"></div>
+                <div class="grid-item" id="board.35.11"></div>
+                <div class="grid-item" id="board.36.11"></div>
+                <div class="grid-item" id="board.37.11"></div>
+                <div class="grid-item" id="board.38.11"></div>
+                <div class="grid-item" id="board.39.11"></div>
+                <div class="grid-item" id="board.40.11"></div>
+                <div class="grid-item" id="board.41.11"></div>
+                <div class="grid-item" id="board.42.11"></div>
+                <div class="grid-item" id="board.43.11"></div>
+                <div class="grid-item" id="board.44.11"></div>
+
+                <div class="grid-item" id="board.0.12"></div>
+                <div class="grid-item" id="board.1.12"></div>
+                <div class="grid-item" id="board.2.12"></div>
+                <div class="grid-item" id="board.3.12"></div>
+                <div class="grid-item" id="board.4.12"></div>
+                <div class="grid-item" id="board.5.12"></div>
+                <div class="grid-item" id="board.6.12"></div>
+                <div class="grid-item" id="board.7.12"></div>
+                <div class="grid-item" id="board.8.12"></div>
+                <div class="grid-item" id="board.9.12"></div>
+                <div class="grid-item" id="board.10.12"></div>
+                <div class="grid-item" id="board.11.12"></div>
+                <div class="grid-item" id="board.12.12"></div>
+                <div class="grid-item" id="board.13.12"></div>
+                <div class="grid-item" id="board.14.12"></div>
+                <div class="grid-item" id="board.15.12"></div>
+                <div class="grid-item" id="board.16.12"></div>
+                <div class="grid-item" id="board.17.12"></div>
+                <div class="grid-item" id="board.18.12"></div>
+                <div class="grid-item" id="board.19.12"></div>
+                <div class="grid-item" id="board.20.12"></div>
+                <div class="grid-item" id="board.21.12"></div>
+                <div class="grid-item" id="board.22.12"></div>
+                <div class="grid-item" id="board.23.12"></div>
+                <div class="grid-item" id="board.24.12"></div>
+                <div class="grid-item" id="board.25.12"></div>
+                <div class="grid-item" id="board.26.12"></div>
+                <div class="grid-item" id="board.27.12"></div>
+                <div class="grid-item" id="board.28.12"></div>
+                <div class="grid-item" id="board.29.12"></div>
+                <div class="grid-item" id="board.30.12"></div>
+                <div class="grid-item" id="board.31.12"></div>
+                <div class="grid-item" id="board.32.12"></div>
+                <div class="grid-item" id="board.33.12"></div>
+                <div class="grid-item" id="board.34.12"></div>
+                <div class="grid-item" id="board.35.12"></div>
+                <div class="grid-item" id="board.36.12"></div>
+                <div class="grid-item" id="board.37.12"></div>
+                <div class="grid-item" id="board.38.12"></div>
+                <div class="grid-item" id="board.39.12"></div>
+                <div class="grid-item" id="board.40.12"></div>
+                <div class="grid-item" id="board.41.12"></div>
+                <div class="grid-item" id="board.42.12"></div>
+                <div class="grid-item" id="board.43.12"></div>
+                <div class="grid-item" id="board.44.12"></div>
+
+                <div class="grid-item" id="board.0.13"></div>
+                <div class="grid-item" id="board.1.13"></div>
+                <div class="grid-item" id="board.2.13"></div>
+                <div class="grid-item" id="board.3.13"></div>
+                <div class="grid-item" id="board.4.13"></div>
+                <div class="grid-item" id="board.5.13"></div>
+                <div class="grid-item" id="board.6.13"></div>
+                <div class="grid-item" id="board.7.13"></div>
+                <div class="grid-item" id="board.8.13"></div>
+                <div class="grid-item" id="board.9.13"></div>
+                <div class="grid-item" id="board.10.13"></div>
+                <div class="grid-item" id="board.11.13"></div>
+                <div class="grid-item" id="board.12.13"></div>
+                <div class="grid-item" id="board.13.13"></div>
+                <div class="grid-item" id="board.14.13"></div>
+                <div class="grid-item" id="board.15.13"></div>
+                <div class="grid-item" id="board.16.13"></div>
+                <div class="grid-item" id="board.17.13"></div>
+                <div class="grid-item" id="board.18.13"></div>
+                <div class="grid-item" id="board.19.13"></div>
+                <div class="grid-item" id="board.20.13"></div>
+                <div class="grid-item" id="board.21.13"></div>
+                <div class="grid-item" id="board.22.13"></div>
+                <div class="grid-item" id="board.23.13"></div>
+                <div class="grid-item" id="board.24.13"></div>
+                <div class="grid-item" id="board.25.13"></div>
+                <div class="grid-item" id="board.26.13"></div>
+                <div class="grid-item" id="board.27.13"></div>
+                <div class="grid-item" id="board.28.13"></div>
+                <div class="grid-item" id="board.29.13"></div>
+                <div class="grid-item" id="board.30.13"></div>
+                <div class="grid-item" id="board.31.13"></div>
+                <div class="grid-item" id="board.32.13"></div>
+                <div class="grid-item" id="board.33.13"></div>
+                <div class="grid-item" id="board.34.13"></div>
+                <div class="grid-item" id="board.35.13"></div>
+                <div class="grid-item" id="board.36.13"></div>
+                <div class="grid-item" id="board.37.13"></div>
+                <div class="grid-item" id="board.38.13"></div>
+                <div class="grid-item" id="board.39.13"></div>
+                <div class="grid-item" id="board.40.13"></div>
+                <div class="grid-item" id="board.41.13"></div>
+                <div class="grid-item" id="board.42.13"></div>
+                <div class="grid-item" id="board.43.13"></div>
+                <div class="grid-item" id="board.44.13"></div>
+
+                <div class="grid-item" id="board.0.14"></div>
+                <div class="grid-item" id="board.1.14"></div>
+                <div class="grid-item" id="board.2.14"></div>
+                <div class="grid-item" id="board.3.14"></div>
+                <div class="grid-item" id="board.4.14"></div>
+                <div class="grid-item" id="board.5.14"></div>
+                <div class="grid-item" id="board.6.14"></div>
+                <div class="grid-item" id="board.7.14"></div>
+                <div class="grid-item" id="board.8.14"></div>
+                <div class="grid-item" id="board.9.14"></div>
+                <div class="grid-item" id="board.10.14"></div>
+                <div class="grid-item" id="board.11.14"></div>
+                <div class="grid-item" id="board.12.14"></div>
+                <div class="grid-item" id="board.13.14"></div>
+                <div class="grid-item" id="board.14.14"></div>
+                <div class="grid-item" id="board.15.14"></div>
+                <div class="grid-item" id="board.16.14"></div>
+                <div class="grid-item" id="board.17.14"></div>
+                <div class="grid-item" id="board.18.14"></div>
+                <div class="grid-item" id="board.19.14"></div>
+                <div class="grid-item" id="board.20.14"></div>
+                <div class="grid-item" id="board.21.14"></div>
+                <div class="grid-item" id="board.22.14"></div>
+                <div class="grid-item" id="board.23.14"></div>
+                <div class="grid-item" id="board.24.14"></div>
+                <div class="grid-item" id="board.25.14"></div>
+                <div class="grid-item" id="board.26.14"></div>
+                <div class="grid-item" id="board.27.14"></div>
+                <div class="grid-item" id="board.28.14"></div>
+                <div class="grid-item" id="board.29.14"></div>
+                <div class="grid-item" id="board.30.14"></div>
+                <div class="grid-item" id="board.31.14"></div>
+                <div class="grid-item" id="board.32.14"></div>
+                <div class="grid-item" id="board.33.14"></div>
+                <div class="grid-item" id="board.34.14"></div>
+                <div class="grid-item" id="board.35.14"></div>
+                <div class="grid-item" id="board.36.14"></div>
+                <div class="grid-item" id="board.37.14"></div>
+                <div class="grid-item" id="board.38.14"></div>
+                <div class="grid-item" id="board.39.14"></div>
+                <div class="grid-item" id="board.40.14"></div>
+                <div class="grid-item" id="board.41.14"></div>
+                <div class="grid-item" id="board.42.14"></div>
+                <div class="grid-item" id="board.43.14"></div>
+                <div class="grid-item" id="board.44.14"></div>
+
+                <div class="grid-item" id="board.0.15"></div>
+                <div class="grid-item" id="board.1.15"></div>
+                <div class="grid-item" id="board.2.15"></div>
+                <div class="grid-item" id="board.3.15"></div>
+                <div class="grid-item" id="board.4.15"></div>
+                <div class="grid-item" id="board.5.15"></div>
+                <div class="grid-item" id="board.6.15"></div>
+                <div class="grid-item" id="board.7.15"></div>
+                <div class="grid-item" id="board.8.15"></div>
+                <div class="grid-item" id="board.9.15"></div>
+                <div class="grid-item" id="board.10.15"></div>
+                <div class="grid-item" id="board.11.15"></div>
+                <div class="grid-item" id="board.12.15"></div>
+                <div class="grid-item" id="board.13.15"></div>
+                <div class="grid-item" id="board.14.15"></div>
+                <div class="grid-item" id="board.15.15"></div>
+                <div class="grid-item" id="board.16.15"></div>
+                <div class="grid-item" id="board.17.15"></div>
+                <div class="grid-item" id="board.18.15"></div>
+                <div class="grid-item" id="board.19.15"></div>
+                <div class="grid-item" id="board.20.15"></div>
+                <div class="grid-item" id="board.21.15"></div>
+                <div class="grid-item" id="board.22.15"></div>
+                <div class="grid-item" id="board.23.15"></div>
+                <div class="grid-item" id="board.24.15"></div>
+                <div class="grid-item" id="board.25.15"></div>
+                <div class="grid-item" id="board.26.15"></div>
+                <div class="grid-item" id="board.27.15"></div>
+                <div class="grid-item" id="board.28.15"></div>
+                <div class="grid-item" id="board.29.15"></div>
+                <div class="grid-item" id="board.30.15"></div>
+                <div class="grid-item" id="board.31.15"></div>
+                <div class="grid-item" id="board.32.15"></div>
+                <div class="grid-item" id="board.33.15"></div>
+                <div class="grid-item" id="board.34.15"></div>
+                <div class="grid-item" id="board.35.15"></div>
+                <div class="grid-item" id="board.36.15"></div>
+                <div class="grid-item" id="board.37.15"></div>
+                <div class="grid-item" id="board.38.15"></div>
+                <div class="grid-item" id="board.39.15"></div>
+                <div class="grid-item" id="board.40.15"></div>
+                <div class="grid-item" id="board.41.15"></div>
+                <div class="grid-item" id="board.42.15"></div>
+                <div class="grid-item" id="board.43.15"></div>
+                <div class="grid-item" id="board.44.15"></div>
+
+                <div class="grid-item" id="board.0.16"></div>
+                <div class="grid-item" id="board.1.16"></div>
+                <div class="grid-item" id="board.2.16"></div>
+                <div class="grid-item" id="board.3.16"></div>
+                <div class="grid-item" id="board.4.16"></div>
+                <div class="grid-item" id="board.5.16"></div>
+                <div class="grid-item" id="board.6.16"></div>
+                <div class="grid-item" id="board.7.16"></div>
+                <div class="grid-item" id="board.8.16"></div>
+                <div class="grid-item" id="board.9.16"></div>
+                <div class="grid-item" id="board.10.16"></div>
+                <div class="grid-item" id="board.11.16"></div>
+                <div class="grid-item" id="board.12.16"></div>
+                <div class="grid-item" id="board.13.16"></div>
+                <div class="grid-item" id="board.14.16"></div>
+                <div class="grid-item" id="board.15.16"></div>
+                <div class="grid-item" id="board.16.16"></div>
+                <div class="grid-item" id="board.17.16"></div>
+                <div class="grid-item" id="board.18.16"></div>
+                <div class="grid-item" id="board.19.16"></div>
+                <div class="grid-item" id="board.20.16"></div>
+                <div class="grid-item" id="board.21.16"></div>
+                <div class="grid-item" id="board.22.16"></div>
+                <div class="grid-item" id="board.23.16"></div>
+                <div class="grid-item" id="board.24.16"></div>
+                <div class="grid-item" id="board.25.16"></div>
+                <div class="grid-item" id="board.26.16"></div>
+                <div class="grid-item" id="board.27.16"></div>
+                <div class="grid-item" id="board.28.16"></div>
+                <div class="grid-item" id="board.29.16"></div>
+                <div class="grid-item" id="board.30.16"></div>
+                <div class="grid-item" id="board.31.16"></div>
+                <div class="grid-item" id="board.32.16"></div>
+                <div class="grid-item" id="board.33.16"></div>
+                <div class="grid-item" id="board.34.16"></div>
+                <div class="grid-item" id="board.35.16"></div>
+                <div class="grid-item" id="board.36.16"></div>
+                <div class="grid-item" id="board.37.16"></div>
+                <div class="grid-item" id="board.38.16"></div>
+                <div class="grid-item" id="board.39.16"></div>
+                <div class="grid-item" id="board.40.16"></div>
+                <div class="grid-item" id="board.41.16"></div>
+                <div class="grid-item" id="board.42.16"></div>
+                <div class="grid-item" id="board.43.16"></div>
+                <div class="grid-item" id="board.44.16"></div>
+
+                <div class="grid-item" id="board.0.17"></div>
+                <div class="grid-item" id="board.1.17"></div>
+                <div class="grid-item" id="board.2.17"></div>
+                <div class="grid-item" id="board.3.17"></div>
+                <div class="grid-item" id="board.4.17"></div>
+                <div class="grid-item" id="board.5.17"></div>
+                <div class="grid-item" id="board.6.17"></div>
+                <div class="grid-item" id="board.7.17"></div>
+                <div class="grid-item" id="board.8.17"></div>
+                <div class="grid-item" id="board.9.17"></div>
+                <div class="grid-item" id="board.10.17"></div>
+                <div class="grid-item" id="board.11.17"></div>
+                <div class="grid-item" id="board.12.17"></div>
+                <div class="grid-item" id="board.13.17"></div>
+                <div class="grid-item" id="board.14.17"></div>
+                <div class="grid-item" id="board.15.17"></div>
+                <div class="grid-item" id="board.16.17"></div>
+                <div class="grid-item" id="board.17.17"></div>
+                <div class="grid-item" id="board.18.17"></div>
+                <div class="grid-item" id="board.19.17"></div>
+                <div class="grid-item" id="board.20.17"></div>
+                <div class="grid-item" id="board.21.17"></div>
+                <div class="grid-item" id="board.22.17"></div>
+                <div class="grid-item" id="board.23.17"></div>
+                <div class="grid-item" id="board.24.17"></div>
+                <div class="grid-item" id="board.25.17"></div>
+                <div class="grid-item" id="board.26.17"></div>
+                <div class="grid-item" id="board.27.17"></div>
+                <div class="grid-item" id="board.28.17"></div>
+                <div class="grid-item" id="board.29.17"></div>
+                <div class="grid-item" id="board.30.17"></div>
+                <div class="grid-item" id="board.31.17"></div>
+                <div class="grid-item" id="board.32.17"></div>
+                <div class="grid-item" id="board.33.17"></div>
+                <div class="grid-item" id="board.34.17"></div>
+                <div class="grid-item" id="board.35.17"></div>
+                <div class="grid-item" id="board.36.17"></div>
+                <div class="grid-item" id="board.37.17"></div>
+                <div class="grid-item" id="board.38.17"></div>
+                <div class="grid-item" id="board.39.17"></div>
+                <div class="grid-item" id="board.40.17"></div>
+                <div class="grid-item" id="board.41.17"></div>
+                <div class="grid-item" id="board.42.17"></div>
+                <div class="grid-item" id="board.43.17"></div>
+                <div class="grid-item" id="board.44.17"></div>
+
+                <div class="grid-item" id="board.0.18"></div>
+                <div class="grid-item" id="board.1.18"></div>
+                <div class="grid-item" id="board.2.18"></div>
+                <div class="grid-item" id="board.3.18"></div>
+                <div class="grid-item" id="board.4.18"></div>
+                <div class="grid-item" id="board.5.18"></div>
+                <div class="grid-item" id="board.6.18"></div>
+                <div class="grid-item" id="board.7.18"></div>
+                <div class="grid-item" id="board.8.18"></div>
+                <div class="grid-item" id="board.9.18"></div>
+                <div class="grid-item" id="board.10.18"></div>
+                <div class="grid-item" id="board.11.18"></div>
+                <div class="grid-item" id="board.12.18"></div>
+                <div class="grid-item" id="board.13.18"></div>
+                <div class="grid-item" id="board.14.18"></div>
+                <div class="grid-item" id="board.15.18"></div>
+                <div class="grid-item" id="board.16.18"></div>
+                <div class="grid-item" id="board.17.18"></div>
+                <div class="grid-item" id="board.18.18"></div>
+                <div class="grid-item" id="board.19.18"></div>
+                <div class="grid-item" id="board.20.18"></div>
+                <div class="grid-item" id="board.21.18"></div>
+                <div class="grid-item" id="board.22.18"></div>
+                <div class="grid-item" id="board.23.18"></div>
+                <div class="grid-item" id="board.24.18"></div>
+                <div class="grid-item" id="board.25.18"></div>
+                <div class="grid-item" id="board.26.18"></div>
+                <div class="grid-item" id="board.27.18"></div>
+                <div class="grid-item" id="board.28.18"></div>
+                <div class="grid-item" id="board.29.18"></div>
+                <div class="grid-item" id="board.30.18"></div>
+                <div class="grid-item" id="board.31.18"></div>
+                <div class="grid-item" id="board.32.18"></div>
+                <div class="grid-item" id="board.33.18"></div>
+                <div class="grid-item" id="board.34.18"></div>
+                <div class="grid-item" id="board.35.18"></div>
+                <div class="grid-item" id="board.36.18"></div>
+                <div class="grid-item" id="board.37.18"></div>
+                <div class="grid-item" id="board.38.18"></div>
+                <div class="grid-item" id="board.39.18"></div>
+                <div class="grid-item" id="board.40.18"></div>
+                <div class="grid-item" id="board.41.18"></div>
+                <div class="grid-item" id="board.42.18"></div>
+                <div class="grid-item" id="board.43.18"></div>
+                <div class="grid-item" id="board.44.18"></div>
+
+                <div class="grid-item" id="board.0.19"></div>
+                <div class="grid-item" id="board.1.19"></div>
+                <div class="grid-item" id="board.2.19"></div>
+                <div class="grid-item" id="board.3.19"></div>
+                <div class="grid-item" id="board.4.19"></div>
+                <div class="grid-item" id="board.5.19"></div>
+                <div class="grid-item" id="board.6.19"></div>
+                <div class="grid-item" id="board.7.19"></div>
+                <div class="grid-item" id="board.8.19"></div>
+                <div class="grid-item" id="board.9.19"></div>
+                <div class="grid-item" id="board.10.19"></div>
+                <div class="grid-item" id="board.11.19"></div>
+                <div class="grid-item" id="board.12.19"></div>
+                <div class="grid-item" id="board.13.19"></div>
+                <div class="grid-item" id="board.14.19"></div>
+                <div class="grid-item" id="board.15.19"></div>
+                <div class="grid-item" id="board.16.19"></div>
+                <div class="grid-item" id="board.17.19"></div>
+                <div class="grid-item" id="board.18.19"></div>
+                <div class="grid-item" id="board.19.19"></div>
+                <div class="grid-item" id="board.20.19"></div>
+                <div class="grid-item" id="board.21.19"></div>
+                <div class="grid-item" id="board.22.19"></div>
+                <div class="grid-item" id="board.23.19"></div>
+                <div class="grid-item" id="board.24.19"></div>
+                <div class="grid-item" id="board.25.19"></div>
+                <div class="grid-item" id="board.26.19"></div>
+                <div class="grid-item" id="board.27.19"></div>
+                <div class="grid-item" id="board.28.19"></div>
+                <div class="grid-item" id="board.29.19"></div>
+                <div class="grid-item" id="board.30.19"></div>
+                <div class="grid-item" id="board.31.19"></div>
+                <div class="grid-item" id="board.32.19"></div>
+                <div class="grid-item" id="board.33.19"></div>
+                <div class="grid-item" id="board.34.19"></div>
+                <div class="grid-item" id="board.35.19"></div>
+                <div class="grid-item" id="board.36.19"></div>
+                <div class="grid-item" id="board.37.19"></div>
+                <div class="grid-item" id="board.38.19"></div>
+                <div class="grid-item" id="board.39.19"></div>
+                <div class="grid-item" id="board.40.19"></div>
+                <div class="grid-item" id="board.41.19"></div>
+                <div class="grid-item" id="board.42.19"></div>
+                <div class="grid-item" id="board.43.19"></div>
+                <div class="grid-item" id="board.44.19"></div>
+
+                <div class="grid-item" id="board.0.20"></div>
+                <div class="grid-item" id="board.1.20"></div>
+                <div class="grid-item" id="board.2.20"></div>
+                <div class="grid-item" id="board.3.20"></div>
+                <div class="grid-item" id="board.4.20"></div>
+                <div class="grid-item" id="board.5.20"></div>
+                <div class="grid-item" id="board.6.20"></div>
+                <div class="grid-item" id="board.7.20"></div>
+                <div class="grid-item" id="board.8.20"></div>
+                <div class="grid-item" id="board.9.20"></div>
+                <div class="grid-item" id="board.10.20"></div>
+                <div class="grid-item" id="board.11.20"></div>
+                <div class="grid-item" id="board.12.20"></div>
+                <div class="grid-item" id="board.13.20"></div>
+                <div class="grid-item" id="board.14.20"></div>
+                <div class="grid-item" id="board.15.20"></div>
+                <div class="grid-item" id="board.16.20"></div>
+                <div class="grid-item" id="board.17.20"></div>
+                <div class="grid-item" id="board.18.20"></div>
+                <div class="grid-item" id="board.19.20"></div>
+                <div class="grid-item" id="board.20.20"></div>
+                <div class="grid-item" id="board.21.20"></div>
+                <div class="grid-item" id="board.22.20"></div>
+                <div class="grid-item" id="board.23.20"></div>
+                <div class="grid-item" id="board.24.20"></div>
+                <div class="grid-item" id="board.25.20"></div>
+                <div class="grid-item" id="board.26.20"></div>
+                <div class="grid-item" id="board.27.20"></div>
+                <div class="grid-item" id="board.28.20"></div>
+                <div class="grid-item" id="board.29.20"></div>
+                <div class="grid-item" id="board.30.20"></div>
+                <div class="grid-item" id="board.31.20"></div>
+                <div class="grid-item" id="board.32.20"></div>
+                <div class="grid-item" id="board.33.20"></div>
+                <div class="grid-item" id="board.34.20"></div>
+                <div class="grid-item" id="board.35.20"></div>
+                <div class="grid-item" id="board.36.20"></div>
+                <div class="grid-item" id="board.37.20"></div>
+                <div class="grid-item" id="board.38.20"></div>
+                <div class="grid-item" id="board.39.20"></div>
+                <div class="grid-item" id="board.40.20"></div>
+                <div class="grid-item" id="board.41.20"></div>
+                <div class="grid-item" id="board.42.20"></div>
+                <div class="grid-item" id="board.43.20"></div>
+                <div class="grid-item" id="board.44.20"></div>
+
+                <div class="grid-item" id="board.0.21"></div>
+                <div class="grid-item" id="board.1.21"></div>
+                <div class="grid-item" id="board.2.21"></div>
+                <div class="grid-item" id="board.3.21"></div>
+                <div class="grid-item" id="board.4.21"></div>
+                <div class="grid-item" id="board.5.21"></div>
+                <div class="grid-item" id="board.6.21"></div>
+                <div class="grid-item" id="board.7.21"></div>
+                <div class="grid-item" id="board.8.21"></div>
+                <div class="grid-item" id="board.9.21"></div>
+                <div class="grid-item" id="board.10.21"></div>
+                <div class="grid-item" id="board.11.21"></div>
+                <div class="grid-item" id="board.12.21"></div>
+                <div class="grid-item" id="board.13.21"></div>
+                <div class="grid-item" id="board.14.21"></div>
+                <div class="grid-item" id="board.15.21"></div>
+                <div class="grid-item" id="board.16.21"></div>
+                <div class="grid-item" id="board.17.21"></div>
+                <div class="grid-item" id="board.18.21"></div>
+                <div class="grid-item" id="board.19.21"></div>
+                <div class="grid-item" id="board.20.21"></div>
+                <div class="grid-item" id="board.21.21"></div>
+                <div class="grid-item" id="board.22.21"></div>
+                <div class="grid-item" id="board.23.21"></div>
+                <div class="grid-item" id="board.24.21"></div>
+                <div class="grid-item" id="board.25.21"></div>
+                <div class="grid-item" id="board.26.21"></div>
+                <div class="grid-item" id="board.27.21"></div>
+                <div class="grid-item" id="board.28.21"></div>
+                <div class="grid-item" id="board.29.21"></div>
+                <div class="grid-item" id="board.30.21"></div>
+                <div class="grid-item" id="board.31.21"></div>
+                <div class="grid-item" id="board.32.21"></div>
+                <div class="grid-item" id="board.33.21"></div>
+                <div class="grid-item" id="board.34.21"></div>
+                <div class="grid-item" id="board.35.21"></div>
+                <div class="grid-item" id="board.36.21"></div>
+                <div class="grid-item" id="board.37.21"></div>
+                <div class="grid-item" id="board.38.21"></div>
+                <div class="grid-item" id="board.39.21"></div>
+                <div class="grid-item" id="board.40.21"></div>
+                <div class="grid-item" id="board.41.21"></div>
+                <div class="grid-item" id="board.42.21"></div>
+                <div class="grid-item" id="board.43.21"></div>
+                <div class="grid-item" id="board.44.21"></div>
+
+                <div class="grid-item" id="board.0.22"></div>
+                <div class="grid-item" id="board.1.22"></div>
+                <div class="grid-item" id="board.2.22"></div>
+                <div class="grid-item" id="board.3.22"></div>
+                <div class="grid-item" id="board.4.22"></div>
+                <div class="grid-item" id="board.5.22"></div>
+                <div class="grid-item" id="board.6.22"></div>
+                <div class="grid-item" id="board.7.22"></div>
+                <div class="grid-item" id="board.8.22"></div>
+                <div class="grid-item" id="board.9.22"></div>
+                <div class="grid-item" id="board.10.22"></div>
+                <div class="grid-item" id="board.11.22"></div>
+                <div class="grid-item" id="board.12.22"></div>
+                <div class="grid-item" id="board.13.22"></div>
+                <div class="grid-item" id="board.14.22"></div>
+                <div class="grid-item" id="board.15.22"></div>
+                <div class="grid-item" id="board.16.22"></div>
+                <div class="grid-item" id="board.17.22"></div>
+                <div class="grid-item" id="board.18.22"></div>
+                <div class="grid-item" id="board.19.22"></div>
+                <div class="grid-item" id="board.20.22"></div>
+                <div class="grid-item" id="board.21.22"></div>
+                <div class="grid-item" id="board.22.22"></div>
+                <div class="grid-item" id="board.23.22"></div>
+                <div class="grid-item" id="board.24.22"></div>
+                <div class="grid-item" id="board.25.22"></div>
+                <div class="grid-item" id="board.26.22"></div>
+                <div class="grid-item" id="board.27.22"></div>
+                <div class="grid-item" id="board.28.22"></div>
+                <div class="grid-item" id="board.29.22"></div>
+                <div class="grid-item" id="board.30.22"></div>
+                <div class="grid-item" id="board.31.22"></div>
+                <div class="grid-item" id="board.32.22"></div>
+                <div class="grid-item" id="board.33.22"></div>
+                <div class="grid-item" id="board.34.22"></div>
+                <div class="grid-item" id="board.35.22"></div>
+                <div class="grid-item" id="board.36.22"></div>
+                <div class="grid-item" id="board.37.22"></div>
+                <div class="grid-item" id="board.38.22"></div>
+                <div class="grid-item" id="board.39.22"></div>
+                <div class="grid-item" id="board.40.22"></div>
+                <div class="grid-item" id="board.41.22"></div>
+                <div class="grid-item" id="board.42.22"></div>
+                <div class="grid-item" id="board.43.22"></div>
+                <div class="grid-item" id="board.44.22"></div>
+
+                <div class="grid-item" id="board.0.23"></div>
+                <div class="grid-item" id="board.1.23"></div>
+                <div class="grid-item" id="board.2.23"></div>
+                <div class="grid-item" id="board.3.23"></div>
+                <div class="grid-item" id="board.4.23"></div>
+                <div class="grid-item" id="board.5.23"></div>
+                <div class="grid-item" id="board.6.23"></div>
+                <div class="grid-item" id="board.7.23"></div>
+                <div class="grid-item" id="board.8.23"></div>
+                <div class="grid-item" id="board.9.23"></div>
+                <div class="grid-item" id="board.10.23"></div>
+                <div class="grid-item" id="board.11.23"></div>
+                <div class="grid-item" id="board.12.23"></div>
+                <div class="grid-item" id="board.13.23"></div>
+                <div class="grid-item" id="board.14.23"></div>
+                <div class="grid-item" id="board.15.23"></div>
+                <div class="grid-item" id="board.16.23"></div>
+                <div class="grid-item" id="board.17.23"></div>
+                <div class="grid-item" id="board.18.23"></div>
+                <div class="grid-item" id="board.19.23"></div>
+                <div class="grid-item" id="board.20.23"></div>
+                <div class="grid-item" id="board.21.23"></div>
+                <div class="grid-item" id="board.22.23"></div>
+                <div class="grid-item" id="board.23.23"></div>
+                <div class="grid-item" id="board.24.23"></div>
+                <div class="grid-item" id="board.25.23"></div>
+                <div class="grid-item" id="board.26.23"></div>
+                <div class="grid-item" id="board.27.23"></div>
+                <div class="grid-item" id="board.28.23"></div>
+                <div class="grid-item" id="board.29.23"></div>
+                <div class="grid-item" id="board.30.23"></div>
+                <div class="grid-item" id="board.31.23"></div>
+                <div class="grid-item" id="board.32.23"></div>
+                <div class="grid-item" id="board.33.23"></div>
+                <div class="grid-item" id="board.34.23"></div>
+                <div class="grid-item" id="board.35.23"></div>
+                <div class="grid-item" id="board.36.23"></div>
+                <div class="grid-item" id="board.37.23"></div>
+                <div class="grid-item" id="board.38.23"></div>
+                <div class="grid-item" id="board.39.23"></div>
+                <div class="grid-item" id="board.40.23"></div>
+                <div class="grid-item" id="board.41.23"></div>
+                <div class="grid-item" id="board.42.23"></div>
+                <div class="grid-item" id="board.43.23"></div>
+                <div class="grid-item" id="board.44.23"></div>
+
+                <div class="grid-item" id="board.0.24"></div>
+                <div class="grid-item" id="board.1.24"></div>
+                <div class="grid-item" id="board.2.24"></div>
+                <div class="grid-item" id="board.3.24"></div>
+                <div class="grid-item" id="board.4.24"></div>
+                <div class="grid-item" id="board.5.24"></div>
+                <div class="grid-item" id="board.6.24"></div>
+                <div class="grid-item" id="board.7.24"></div>
+                <div class="grid-item" id="board.8.24"></div>
+                <div class="grid-item" id="board.9.24"></div>
+                <div class="grid-item" id="board.10.24"></div>
+                <div class="grid-item" id="board.11.24"></div>
+                <div class="grid-item" id="board.12.24"></div>
+                <div class="grid-item" id="board.13.24"></div>
+                <div class="grid-item" id="board.14.24"></div>
+                <div class="grid-item" id="board.15.24"></div>
+                <div class="grid-item" id="board.16.24"></div>
+                <div class="grid-item" id="board.17.24"></div>
+                <div class="grid-item" id="board.18.24"></div>
+                <div class="grid-item" id="board.19.24"></div>
+                <div class="grid-item" id="board.20.24"></div>
+                <div class="grid-item" id="board.21.24"></div>
+                <div class="grid-item" id="board.22.24"></div>
+                <div class="grid-item" id="board.23.24"></div>
+                <div class="grid-item" id="board.24.24"></div>
+                <div class="grid-item" id="board.25.24"></div>
+                <div class="grid-item" id="board.26.24"></div>
+                <div class="grid-item" id="board.27.24"></div>
+                <div class="grid-item" id="board.28.24"></div>
+                <div class="grid-item" id="board.29.24"></div>
+                <div class="grid-item" id="board.30.24"></div>
+                <div class="grid-item" id="board.31.24"></div>
+                <div class="grid-item" id="board.32.24"></div>
+                <div class="grid-item" id="board.33.24"></div>
+                <div class="grid-item" id="board.34.24"></div>
+                <div class="grid-item" id="board.35.24"></div>
+                <div class="grid-item" id="board.36.24"></div>
+                <div class="grid-item" id="board.37.24"></div>
+                <div class="grid-item" id="board.38.24"></div>
+                <div class="grid-item" id="board.39.24"></div>
+                <div class="grid-item" id="board.40.24"></div>
+                <div class="grid-item" id="board.41.24"></div>
+                <div class="grid-item" id="board.42.24"></div>
+                <div class="grid-item" id="board.43.24"></div>
+                <div class="grid-item" id="board.44.24"></div>
+
+                <div class="grid-item" id="board.0.25"></div>
+                <div class="grid-item" id="board.1.25"></div>
+                <div class="grid-item" id="board.2.25"></div>
+                <div class="grid-item" id="board.3.25"></div>
+                <div class="grid-item" id="board.4.25"></div>
+                <div class="grid-item" id="board.5.25"></div>
+                <div class="grid-item" id="board.6.25"></div>
+                <div class="grid-item" id="board.7.25"></div>
+                <div class="grid-item" id="board.8.25"></div>
+                <div class="grid-item" id="board.9.25"></div>
+                <div class="grid-item" id="board.10.25"></div>
+                <div class="grid-item" id="board.11.25"></div>
+                <div class="grid-item" id="board.12.25"></div>
+                <div class="grid-item" id="board.13.25"></div>
+                <div class="grid-item" id="board.14.25"></div>
+                <div class="grid-item" id="board.15.25"></div>
+                <div class="grid-item" id="board.16.25"></div>
+                <div class="grid-item" id="board.17.25"></div>
+                <div class="grid-item" id="board.18.25"></div>
+                <div class="grid-item" id="board.19.25"></div>
+                <div class="grid-item" id="board.20.25"></div>
+                <div class="grid-item" id="board.21.25"></div>
+                <div class="grid-item" id="board.22.25"></div>
+                <div class="grid-item" id="board.23.25"></div>
+                <div class="grid-item" id="board.24.25"></div>
+                <div class="grid-item" id="board.25.25"></div>
+                <div class="grid-item" id="board.26.25"></div>
+                <div class="grid-item" id="board.27.25"></div>
+                <div class="grid-item" id="board.28.25"></div>
+                <div class="grid-item" id="board.29.25"></div>
+                <div class="grid-item" id="board.30.25"></div>
+                <div class="grid-item" id="board.31.25"></div>
+                <div class="grid-item" id="board.32.25"></div>
+                <div class="grid-item" id="board.33.25"></div>
+                <div class="grid-item" id="board.34.25"></div>
+                <div class="grid-item" id="board.35.25"></div>
+                <div class="grid-item" id="board.36.25"></div>
+                <div class="grid-item" id="board.37.25"></div>
+                <div class="grid-item" id="board.38.25"></div>
+                <div class="grid-item" id="board.39.25"></div>
+                <div class="grid-item" id="board.40.25"></div>
+                <div class="grid-item" id="board.41.25"></div>
+                <div class="grid-item" id="board.42.25"></div>
+                <div class="grid-item" id="board.43.25"></div>
+                <div class="grid-item" id="board.44.25"></div>
+
+                <div class="grid-item" id="board.0.26"></div>
+                <div class="grid-item" id="board.1.26"></div>
+                <div class="grid-item" id="board.2.26"></div>
+                <div class="grid-item" id="board.3.26"></div>
+                <div class="grid-item" id="board.4.26"></div>
+                <div class="grid-item" id="board.5.26"></div>
+                <div class="grid-item" id="board.6.26"></div>
+                <div class="grid-item" id="board.7.26"></div>
+                <div class="grid-item" id="board.8.26"></div>
+                <div class="grid-item" id="board.9.26"></div>
+                <div class="grid-item" id="board.10.26"></div>
+                <div class="grid-item" id="board.11.26"></div>
+                <div class="grid-item" id="board.12.26"></div>
+                <div class="grid-item" id="board.13.26"></div>
+                <div class="grid-item" id="board.14.26"></div>
+                <div class="grid-item" id="board.15.26"></div>
+                <div class="grid-item" id="board.16.26"></div>
+                <div class="grid-item" id="board.17.26"></div>
+                <div class="grid-item" id="board.18.26"></div>
+                <div class="grid-item" id="board.19.26"></div>
+                <div class="grid-item" id="board.20.26"></div>
+                <div class="grid-item" id="board.21.26"></div>
+                <div class="grid-item" id="board.22.26"></div>
+                <div class="grid-item" id="board.23.26"></div>
+                <div class="grid-item" id="board.24.26"></div>
+                <div class="grid-item" id="board.25.26"></div>
+                <div class="grid-item" id="board.26.26"></div>
+                <div class="grid-item" id="board.27.26"></div>
+                <div class="grid-item" id="board.28.26"></div>
+                <div class="grid-item" id="board.29.26"></div>
+                <div class="grid-item" id="board.30.26"></div>
+                <div class="grid-item" id="board.31.26"></div>
+                <div class="grid-item" id="board.32.26"></div>
+                <div class="grid-item" id="board.33.26"></div>
+                <div class="grid-item" id="board.34.26"></div>
+                <div class="grid-item" id="board.35.26"></div>
+                <div class="grid-item" id="board.36.26"></div>
+                <div class="grid-item" id="board.37.26"></div>
+                <div class="grid-item" id="board.38.26"></div>
+                <div class="grid-item" id="board.39.26"></div>
+                <div class="grid-item" id="board.40.26"></div>
+                <div class="grid-item" id="board.41.26"></div>
+                <div class="grid-item" id="board.42.26"></div>
+                <div class="grid-item" id="board.43.26"></div>
+                <div class="grid-item" id="board.44.26"></div>
+            
+          </div>
+
+        </body>
+
+			</div>
+
+      <div id="menu" hidden>
+            <p>yessir</p>
+            <button id="startButton" onclick="draw()">Start</button>
+          </div>
+
+		</main>
+
+		<nav id="nav">
+			<div class="innertube">
+				<h1><a href="games.html" style="text-decoration:none; color:black;">Games</a></h1>
+				<h1>Everyday Codes</h1>
+			</div>
+		</nav>	
+	</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<title>Play a Friend</title>
+
+<style>
+  .grid-container {
+    text-align: center;
+    display: grid;
+    grid-gap: 0px 0px;
+    grid-template-columns: repeat(3, auto);
+    background-color: #A47449;
+
+    width: 250px;
+    height: 250px;
+
+    margin: 0px auto;
+    padding: 15px;
+  }
+
+  .grid-item {
+    font-size: 30px;
+    font-family: "Permanent Marker", cursive;
+    background-color: white;
+    border: 3px solid black;
+    padding: 15px;
+    font-size: 70px;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+</style>
+
+<style type="text/css"> 
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%; 
+    max-height: 100%; 
+    font-family:Sans-serif;
+    line-height: 1.5em;
+  }
+  
+  #header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; 
+    overflow: hidden; /* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" */
+    background: white;
+  }
+  
+  #nav {
+    position: absolute; 
+    top: 100px; 
+    left: 0; 
+    bottom: 0;
+    width: 150px;
+    overflow: auto; /* Scrollbars will appear on this frame only when there's enough content to require scrolling. To disable scrollbars, change to "hidden", or use "scroll" to enable permanent scrollbars */
+    background:rgb(211, 211, 211); 
+  }
+  
+  #logo {
+    padding:10px;
+  }
+  
+  main {
+    position: fixed;
+    top: 100px; /* Set this to the height of the header */
+    left: 150px; 
+    right: 0;
+    bottom: 0;
+    overflow: auto; 
+    background: #A47449;
+  }
+  
+  .innertube {
+    margin: 15px; /* Provides padding for the content */
+  }
+  
+  p {
+    color: #555;
+  }
+
+  nav h1, nav h1 a, nav l1 a {
+    color: black;
+    text-decoration: none;
+  }
+
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+
+      
+  /*IE6 fix*/
+  * html body{
+    padding: 100px 0 0 230px; /* Set the first value to the height of the header and last value to the width of the nav */
+  }
+  
+  * html main{ 
+    height: 100%; 
+    width: 100%; 
+  }
+
+</style>
+
+<script src="../JavaScript/Games/TicTacToePVP.js"></script>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">		
+	</head>
+	
+	<body>		
+
+		<header id="header">
+			<div id="logo">
+				<!-- <h1 style="font-size:45px;color:black">Imax The Goat</h1> -->
+        <a href="homepage.html"><img src="../Logo.png" style="max-width:23%; max-height:23%;" alt="Sample picture"></a>
+			</div>
+		</header>
+				
+		<main>
+			<div class="innertube">
+				
+        <body style="background-color: #A47449;">
+
+          <h1 style="text-align:center;">Tic Tac Toe PvP</h1>
+
+          <div class="grid-container">
+              <div class="grid-item" id="row1" onclick="chooseSpot(0)"></div>
+              <div class="grid-item" id="row2" onclick="chooseSpot(1)"></div>
+              <div class="grid-item" id="row3" onclick="chooseSpot(2)"></div>
+              <div class="grid-item" id="row4" onclick="chooseSpot(3)"></div>
+              <div class="grid-item" id="row5" onclick="chooseSpot(4)"></div>
+              <div class="grid-item" id="row6" onclick="chooseSpot(5)"></div>
+              <div class="grid-item" id="row7" onclick="chooseSpot(6)"></div>
+              <div class="grid-item" id="row8" onclick="chooseSpot(7)"></div>
+              <div class="grid-item" id="row9" onclick="chooseSpot(8)"></div>
+          </div>
+        
+          <h2 style="text-align:center; font-size:30px; color:black" id="output">Player One's Turn</h2>
+          <p style="text-align:center"><button style="height: 50px; width: 100px; text-align: center; color:red;" onclick="restart()">RESTART</button></p>
+
+        </body>
+
+			</div>
+		</main>
+
+		<nav id="nav">
+			<div class="innertube">
+				<h1><a href="games.html" style="text-decoration:none;color:black;">Games</a></h1>
+				<h1>Everyday Codes</h1>
+			</div>
+		</nav>	
+	</body>
+</html>

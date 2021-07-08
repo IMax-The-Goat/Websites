@@ -1,0 +1,175 @@
+<!--
+<div style="width:1000px;height:100px;background:white;float:top">
+  <h1>Games</h1>
+</div>
+  
+<div style="width:100px;height:900px;background:rgb(211, 211, 211);float:left">
+  <p><a href="homepage.html" style="color: black;">HOME</a></p>
+  <p><a href="games.html" style="color: black;">Games</a></p>
+  <p><a href="usefulStuff.html" style="color: black;">Useful Stuff</a></p>
+
+</div>
+
+<body style="background-color:#7851a9;">
+  <title>Imax's Games</title>
+  <p style="color:white">This webpage will have my games on it!</p>
+  <p></p>
+
+
+  <div class="grid-container">
+    <div class="grid-item"><a href="tictactoe.html" style="color:black;">Tic-Tac-Toe</a></div>
+    <div class="grid-item">2</div>
+    <div class="grid-item">3</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">4</div>
+  </div>
+
+</body>  
+-->
+
+<!DOCTYPE html>
+
+<style>
+  .grid-container {
+    display: grid;
+    grid-gap: 50px 50px;
+    grid-template-columns: auto auto;
+    background-color: #0E7A0D;
+    padding: 50px;
+  }
+  
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #0E7A0D;
+    padding: 15px;
+    font-size: 30px;
+    text-align: center;
+  }
+</style>
+
+<!-- Template by quackit.com -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Imax's Games</title>
+		<style type="text/css">
+		
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%; 
+        max-height: 100%; 
+        font-family:Sans-serif;
+        line-height: 1.5em;
+      }
+      
+      #header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px; 
+        overflow: hidden; /* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" */
+        background: white;
+      }
+      
+      #nav {
+        position: absolute; 
+        top: 100px; 
+        left: 0; 
+        bottom: 0;
+        width: 150px;
+        overflow: auto; /* Scrollbars will appear on this frame only when there's enough content to require scrolling. To disable scrollbars, change to "hidden", or use "scroll" to enable permanent scrollbars */
+        background:rgb(211, 211, 211); 
+      }
+      
+      #logo {
+        padding:10px;
+      }
+      
+      main {
+        position: fixed;
+        top: 100px; /* Set this to the height of the header */
+        left: 150px; 
+        right: 0;
+        bottom: 0;
+        overflow: auto; 
+        background: #0E7A0D;
+      }
+      
+      .innertube {
+        margin: 15px; /* Provides padding for the content */
+      }
+      
+      p {
+        color: #555;
+      }
+
+      nav h1, nav h1 a, nav l1 a {
+        color: black;
+        text-decoration: none;
+      }
+
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+
+          
+      /*IE6 fix*/
+      * html body{
+        padding: 100px 0 0 230px; /* Set the first value to the height of the header and last value to the width of the nav */
+      }
+      
+      * html main{ 
+        height: 100%; 
+        width: 100%; 
+      }
+		
+		</style>
+		
+
+	
+	</head>
+	
+	<body>		
+
+		<header id="header">
+			<div id="logo">
+				<!-- <h1><a href="homepage.html" style="text-decoration:none;font-size:45px;color:black">Imax's Games</a></h1> -->
+        <a href="homepage.html"><img src="../Logo.png" style="max-width:23%; max-height:23%" alt="Sample picture"></a>
+			</div>
+		</header>
+				
+		<main>
+			<div class="innertube">
+        <div class="grid-container">
+          <div class="grid-item"><a href="tictactoepvp.html" target="_blank" style="color:black;">TicTacToe - pvp</a></div>
+          <div class="grid-item"><a href="tictactoecomp.html" target="_blank" style="color:black;">TicTacToe - Comp</a></div>
+          <div class="grid-item"><a href="connect4pvp.html" target="_blank" style="color:black;">Connect 4 - pvp</a></div>
+          <div class="grid-item"><a href="connect4comp.html" target="_blank" style="color:black;">Connect 4 - Comp</a></div>
+          <div class="grid-item">Minesweeper</div>
+          <div class="grid-item"><a href="snake.html" target="_blank" style="color:black;">Snake</a></div>
+        </div>
+				
+			</div>
+		</main>
+
+		<nav id="nav">
+			<div class="innertube">
+				<h1>Games</h1>
+				<h1><a href="everyday.html" style="text-decoration:none;color:black;">Everyday Codes</a></h1>
+			</div>
+		</nav>	
+	</body>
+</html>
